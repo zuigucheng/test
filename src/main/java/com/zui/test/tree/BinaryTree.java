@@ -26,8 +26,13 @@ public class BinaryTree {
     }
 }
 
-@AllArgsConstructor
 class TreeNode{
+    public TreeNode(TreeNode left, int data, TreeNode right) {
+        this.left = left;
+        this.data = data;
+        this.right = right;
+    }
+
     TreeNode left;
     int data;
     TreeNode right;
