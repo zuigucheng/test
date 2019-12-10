@@ -5,10 +5,10 @@ package com.zui.test.demo;
  * @date 2019.12.05 19:55
  */
 public class Test {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         System.out.println(Test2.a);
-        Thread.sleep(1000);
-        System.out.println(Test2.num);
+//        Thread.sleep(1000);
+//        System.out.println(Test2.num);
     }
 }
 

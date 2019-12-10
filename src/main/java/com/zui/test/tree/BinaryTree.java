@@ -9,14 +9,13 @@ import lombok.AllArgsConstructor;
 public class BinaryTree {
 
     public static void main(String[] args) {
-        TreeNode A = new TreeNode(null,1,null);
-        TreeNode B = new TreeNode(A, 2, null);
-        pre(B);
+        TreeNode a = new TreeNode(null,1,null);
+        TreeNode b = new TreeNode(a, 2, null);
+        pre(b);
     }
 
     public static void pre(TreeNode treeNode){
         System.out.println(treeNode.data);
-
         if (treeNode.left!=null){
             pre(treeNode.left);
         }

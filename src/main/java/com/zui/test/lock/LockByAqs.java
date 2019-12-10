@@ -10,5 +10,7 @@ public class LockByAqs {
 
 
     public static void main(String[] args) {
+        for (int i = 0; i < TASK_COUNT; i++) {
+        }
     }
 }
