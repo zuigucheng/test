@@ -13,6 +13,11 @@ public class Demo {
      * 保存分割后的任务
      */
     private static Map<Integer, List<String[]>> map = new HashMap<>();
+
+
+    /**
+     * 使用线程安全的集合或者ThreadLocal
+     */
     private static Map<Integer, Set<Integer>> resultMap = new ConcurrentHashMap<>(20);
 
     /**
@@ -59,7 +64,16 @@ public class Demo {
 
 
         /*计算密集型任务,开启线程数为CPU核数+1*/
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5, 0L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1));
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5, 0L
+                , TimeUnit.SECONDS, new ArrayBlockingQueue<>(1), new ThreadFactory() {
+            int counter = 1;
+
+            @Override
+            public Thread newThread(Runnable runnable) {
+                Thread t = new Thread(runnable, counter++ + "-Thread_" + counter);
+                return t;
+            }
+        });
 
         //使用"门栓"(作用:等待所有线程到达释放点才向下执行)
         CountDownLatch countDownLatch = new CountDownLatch(map.size());
@@ -71,7 +85,7 @@ public class Demo {
                 List<String[]> chars = map.get(integer);
 
                 /*线程池提价任务,任务为内部Runnable*/
-                threadPoolExecutor.execute(() -> {
+                threadPoolExecutor.execute(threadPoolExecutor.getThreadFactory().newThread(() -> {
 
                     /*处理方式类似String的重写equals()逻辑*/
                     int i = chars.size() - 1;
@@ -108,7 +122,7 @@ public class Demo {
 
                     //释放计数
                     countDownLatch.countDown();
-                });
+                }));
             }
         } catch (Exception e) {
             e.printStackTrace();
