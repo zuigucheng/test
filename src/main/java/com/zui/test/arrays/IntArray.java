@@ -9,8 +9,6 @@ public class IntArray {
     int[] datas;
     int size;
     int len;
-    static final int DEFAULT_LOAD_FACTOR = 2;
-
 
     public IntArray(int size) {
         this.size = size;
@@ -40,13 +38,8 @@ public class IntArray {
     }
 
     private void reSize() {
-
-        int[] temp = new int[size * DEFAULT_LOAD_FACTOR];
-
-
-        for (int i = 0; i < this.datas.length; i++) {
-            temp[i] = datas[i];
-        }
+        int[] temp = new int[size + size >> 1];
+        System.arraycopy(datas,0,temp,0,len);
         this.datas = temp;
     }
 }
