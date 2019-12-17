@@ -14,6 +14,15 @@ import java.util.Iterator;
  * @date 2019.12.15 22:51
  */
 public class Server {
+
+    /**
+     * 1.创建通道
+     * 2.创建复用器
+     * 3.将通道注册到复用器上
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         //创建通道
@@ -41,9 +50,9 @@ public class Server {
             System.out.println("监听到了事件");
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             while (iterator.hasNext()) {
-                SelectionKey next = iterator.next();
+                SelectionKey key = iterator.next();
                 iterator.remove();
-                handler(next);
+                handler(key);
             }
         }
     }
@@ -52,9 +61,10 @@ public class Server {
         if (key.isAcceptable()) {
             System.out.println("连接事件发生");
             ServerSocketChannel channel = (ServerSocketChannel) key.channel();
-            SocketChannel accept = channel.accept();
-            accept.configureBlocking(false);
-            accept.register(key.selector(), SelectionKey.OP_READ);
+            SocketChannel socketChannel = channel.accept();
+            socketChannel.configureBlocking(false);
+            socketChannel.register(key.selector(), SelectionKey.OP_READ);
+
         } else if (key.isReadable()) {
             System.out.println("读取事件发生");
             SocketChannel channel = (SocketChannel) key.channel();

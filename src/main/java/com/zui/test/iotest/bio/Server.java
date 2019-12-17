@@ -17,16 +17,16 @@ public class Server {
             //等待连接时阻塞
             Socket socket = serverSocket.accept();
             System.out.println("连接已创建");
-            new Thread(() -> {
-                try {
-                    handler(socket);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }).start();
+//            new Thread(() -> {
+//                try {
+//                    handler(socket);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }).start();
+            handler(socket);
         }
 
-//        handler(socket);
     }
 
     private static void handler(Socket socket) throws IOException {

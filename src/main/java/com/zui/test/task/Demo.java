@@ -38,6 +38,9 @@ public class Demo {
         objects.add(new User(3, "23332"));
         objects.add(new User(4, "2332"));
         objects.add(new User(5, "23332"));
+        objects.add(new User(6, "23332"));
+        objects.add(new User(7, "33321"));
+        objects.add(new User(8, "33321"));
 
         /*遍历字符串做任务处理,时间复杂度O(n)*/
         for (User object : objects) {
@@ -62,7 +65,10 @@ public class Demo {
             map.put(chars1.length, objects1);
         }
 
+        handler();
+    }
 
+    private static void handler() throws InterruptedException {
         /*计算密集型任务,开启线程数为CPU核数+1*/
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5, 0L
                 , TimeUnit.SECONDS, new ArrayBlockingQueue<>(1), new ThreadFactory() {
@@ -74,6 +80,7 @@ public class Demo {
                 return t;
             }
         });
+
 
         //使用"门栓"(作用:等待所有线程到达释放点才向下执行)
         CountDownLatch countDownLatch = new CountDownLatch(map.size());
@@ -93,17 +100,12 @@ public class Demo {
 
                         String[] v1 = chars.get(i);
                         String[] v2 = chars.get(--i);
-                        boolean isFalse = false;
 
                         int i1 = v1.length - 1;
                         while (i1-- != 0) {
                             if (!v1[i1].equals(v2[i1])) {
-                                isFalse = true;
                                 break;
                             }
-                        }
-                        if (isFalse) {
-                            break;
                         }
 
                         //使用set保存,利用set不可重复的天然特性
