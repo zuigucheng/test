@@ -1,4 +1,4 @@
-package com.zui.test.task;
+package com.zui.test.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

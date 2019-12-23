@@ -169,7 +169,7 @@ public class SimpleArrayList<E> implements SimpleList<E>, Serializable {
         objectSimpleArrayList.add(5);
 
 
-        int o = (int)objectSimpleArrayList.get(3);
+        int o = (int) objectSimpleArrayList.get(3);
         System.out.println(o);
 
         objectSimpleArrayList.remove(1);

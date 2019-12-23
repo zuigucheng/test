@@ -12,7 +12,7 @@ public class Test {
     }
 }
 
-class Test2{
+class Test2 {
     public static final String a = "JD";
     public static final Double num = Math.random();
 

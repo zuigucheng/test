@@ -39,7 +39,7 @@ public class IntArray {
 
     private void reSize() {
         int[] temp = new int[size + size >> 1];
-        System.arraycopy(datas,0,temp,0,len);
+        System.arraycopy(datas, 0, temp, 0, len);
         this.datas = temp;
     }
 }

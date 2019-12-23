@@ -1,5 +1,7 @@
 package com.zui.test.task;
 
+import com.zui.test.bean.User;
+
 import java.util.*;
 import java.util.concurrent.*;
 
