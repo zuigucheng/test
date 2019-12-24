@@ -15,7 +15,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  */
 public class NettyServer {
     public static void main(String[] args) throws InterruptedException {
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup(3);
 
         try {
@@ -30,9 +30,9 @@ public class NettyServer {
                         }
                     });
 
-            System.out.println("netty started");
 
             ChannelFuture sync = serverBootstrap.bind(8080).sync();
+            System.out.println("netty started");
             sync.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
